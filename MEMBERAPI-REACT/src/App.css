@@ -1,0 +1,11 @@
+/* Add any specific styles for your App component here */
+/* For now, we can leave it mostly empty */
+
+div {
+  margin-bottom: 15px;
+}
+
+input, select, button {
+  padding: 8px;
+  font-size: 14px;
+}

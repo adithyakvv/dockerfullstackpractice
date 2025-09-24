@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+
+    stages {
+
+        // ===================================
+        // ===== FRONTEND BUILD STAGE ========
+        // ===================================
+        stage('Build Frontend') {
+            steps {
+                // Change directory to our React project
+                dir('MEMBERAPI-REACT') {
+                    // Install dependencies and create the production build
+                    bat 'npm install'
+                    bat 'npm run build'
+                }
+            }
+        }
+
+        // ===================================
+        // ===== FRONTEND DEPLOY STAGE =======
+        // ===================================
+        stage('Deploy Frontend to Tomcat') {
+            steps {
+                // This is a Windows batch script to copy the build files
+                bat '''
+                rem --- First, clean up the old deployment ---
+                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react" (
+                    rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react"
+                )
+
+                rem --- Create a fresh directory and copy the new build ---
+                mkdir "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react"
+                xcopy /E /I /Y MEMBERAPI-REACT\\dist\\* "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react"
+                '''
+            }
+        }
+
+        // ===================================
+        // ===== BACKEND BUILD STAGE =========
+        // ===================================
+        stage('Build Backend') {
+            steps {
+                // Change directory to our Spring Boot project
+                dir('MEMBERAPI-SPRINGBOOT') {
+                    // Use Maven to clean and package the application into a .war file
+                    bat 'mvn clean package'
+                }
+            }
+        }
+
+        // ===================================
+        // ===== BACKEND DEPLOY STAGE ========
+        // ===================================
+        stage('Deploy Backend to Tomcat') {
+            steps {
+                // This is a Windows batch script to deploy the .war file
+                bat '''
+                rem --- First, clean up the old .war file and exploded directory ---
+                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot.war" (
+                    del /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot.war"
+                )
+                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot" (
+                    rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot"
+                )
+
+                rem --- Copy the new .war file to the Tomcat webapps directory ---
+                copy "MEMBERAPI-SPRINGBOOT\\target\\memberapi-springboot.war" "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\"
+                '''
+            }
+        }
+    }
+
+    // This block runs at the end of the pipeline
+    post {
+        success {
+            echo 'Deployment Successful! The full stack application has been built and deployed.'
+        }
+        failure {
+            echo 'Pipeline Failed. Please check the console output for errors.'
+        }
+    }
+}
