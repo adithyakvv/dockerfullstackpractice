@@ -34,6 +34,7 @@ const MemberManager = () => {
     };
 
     const validateForm = () => {
+        // This validation correctly checks that all fields, including 'id', are filled.
         for (let key in member) {
             if (!member[key] || member[key].toString().trim() === '') {
                 setMessage(`Error: Please fill out the '${key}' field.`);
@@ -51,6 +52,7 @@ const MemberManager = () => {
             fetchAllMembers();
             resetForm();
         } catch (error) {
+            // This error message correctly appears when the database rejects the data (e.g., duplicate ID).
             setMessage('Error adding member. It might be a duplicate ID or Email.');
             console.error(error);
         }
@@ -81,6 +83,10 @@ const MemberManager = () => {
     };
 
     const getMemberById = async () => {
+        if (!idToFetch) {
+            setMessage('Please enter an ID to fetch.');
+            return;
+        }
         try {
             const res = await axios.get(`${config.url}/get/${idToFetch}`);
             setFetchedMember(res.data);
