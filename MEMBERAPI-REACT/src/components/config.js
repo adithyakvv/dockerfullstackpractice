@@ -1,6 +1,6 @@
 // This configuration file exports the base URL of our backend API.
 const config = {
-    url: "http://localhost:2030/memberapi-springboot"
+    url: "http://localhost:2030/gymbackend/gymapi"
 };
 
 export default config;

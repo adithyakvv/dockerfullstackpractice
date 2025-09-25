@@ -18,12 +18,17 @@ import com.klef.dev.entity.Member;
 import com.klef.dev.service.MemberService;
 
 @RestController
-@RequestMapping("/") // A common practice is to have a base path for your API
+@RequestMapping("/gymapi") // A common practice is to have a base path for your API
 @CrossOrigin(origins = "*")    // Allows requests from any frontend
 public class MemberController 
 {
 	@Autowired
 	private MemberService memberService;
+	@GetMapping("/base")
+    public String home() 
+    {
+        return "Full Stack Deployment Demo";
+    }
 	
 	@PostMapping("/add")
 	public ResponseEntity<Member> addMember(@RequestBody Member member)

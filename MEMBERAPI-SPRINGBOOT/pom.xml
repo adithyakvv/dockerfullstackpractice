@@ -57,7 +57,7 @@
 
     <build>
         <!-- IMPORTANT: Gives the final output file a clean, predictable name -->
-        <finalName>memberapi-springboot</finalName>
+        <finalName>gymbackend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
