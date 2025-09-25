@@ -54,7 +54,6 @@ pipeline {
         // ===================================
         stage('Deploy Backend to Tomcat') {
             steps {
-                // This is a Windows batch script to deploy the .war file
                 bat '''
                 rem --- First, clean up the old .war file and exploded directory ---
                 if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymbackend.war" (
@@ -65,7 +64,8 @@ pipeline {
                 )
 
                 rem --- Copy the new .war file to the Tomcat webapps directory ---
-                copy "MEMBERAPI-SPRINGBOOT\\target\\memberapi-springboot.war" "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\"
+                rem --- FIXED: Changed the filename to match the build output ---
+                copy "MEMBERAPI-SPRINGBOOT\\target\\gymbackend.war" "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\"
                 '''
             }
         }
