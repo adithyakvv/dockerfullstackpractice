@@ -13,7 +13,7 @@ public class Member {
     
     @Id
     @Column(name = "member_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // This new line fixes the error
+    // This new line fixes the error
     private int id;
     
     @Column(name = "member_name", nullable = false, length = 50)
