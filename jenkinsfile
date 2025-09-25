@@ -25,13 +25,13 @@ pipeline {
                 // This is a Windows batch script to copy the build files
                 bat '''
                 rem --- First, clean up the old deployment ---
-                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react" (
-                    rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react"
+                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymreact" (
+                    rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymreact"
                 )
 
                 rem --- Create a fresh directory and copy the new build ---
-                mkdir "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react"
-                xcopy /E /I /Y MEMBERAPI-REACT\\dist\\* "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-react"
+                mkdir "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymreact"
+                xcopy /E /I /Y MEMBERAPI-REACT\\dist\\* "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymreact"
                 '''
             }
         }
