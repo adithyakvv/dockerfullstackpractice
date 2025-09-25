@@ -2,6 +2,8 @@ package com.klef.dev.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue; // Add this import
+import jakarta.persistence.GenerationType; // Add this import
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,6 +13,7 @@ public class Member {
     
     @Id
     @Column(name = "member_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // This new line fixes the error
     private int id;
     
     @Column(name = "member_name", nullable = false, length = 50)
@@ -20,7 +23,7 @@ public class Member {
     private String gender;
     
     @Column(name = "membership_type", nullable = false, length = 20)
-    private String membershipType; // Parallels the 'department' field
+    private String membershipType; 
     
     @Column(name = "member_email", nullable = false, unique = true, length = 50)
     private String email;
@@ -29,11 +32,9 @@ public class Member {
     private String contact;
     
     @Column(name = "membership_fee", nullable = false)
-    private double fee; // Parallels the 'salary' field
+    private double fee; 
 
-    // ===========================================
-    // Getters and Setters
-    // ===========================================
+    // Getters and Setters remain the same...
     
     public int getId() {
         return id;
