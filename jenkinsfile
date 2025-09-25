@@ -57,11 +57,11 @@ pipeline {
                 // This is a Windows batch script to deploy the .war file
                 bat '''
                 rem --- First, clean up the old .war file and exploded directory ---
-                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot.war" (
-                    del /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot.war"
+                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymbackend.war" (
+                    del /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymbackend.war"
                 )
-                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot" (
-                    rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\memberapi-springboot"
+                if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymbackend" (
+                    rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\gymbackend"
                 )
 
                 rem --- Copy the new .war file to the Tomcat webapps directory ---
