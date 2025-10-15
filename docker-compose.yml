@@ -19,11 +19,9 @@ services:
       start_period: 30s
 
   backend:
-    #image: havinashreddy/dockeroct15-backend:latest
+    image: adithyakvv/dockerwow-backend:latest
     container_name: springboot
-    build:
-      context: ./MEMBERAPI-SPRINGBOOT
-      dockerfile: backend.Dockerfile
+    
     ports:
       - "2025:2001"
     depends_on:
@@ -33,11 +31,9 @@ services:
       - springboot-mysql-net
 
   frontend:
-    #image: havinashreddy/dockeroct15-frontend:latest
+    image: adithyakvv/dockerwow-frontend:latest
     container_name: react
-    build:
-      context: ./MEMBERAPI-REACT
-      dockerfile: frontend.Dockerfile
+    
     ports:
       - "3000:80"
     depends_on:
