@@ -15,7 +15,6 @@
     <description>Gym Membership API for Jenkins Deployment</description>
     
     <!-- IMPORTANT: Packaging is set to 'war' -->
-    <packaging>war</packaging>
 
     <properties>
         <java.version>17</java.version>
@@ -57,7 +56,6 @@
 
     <build>
         <!-- IMPORTANT: Gives the final output file a clean, predictable name -->
-        <finalName>gymbackend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
